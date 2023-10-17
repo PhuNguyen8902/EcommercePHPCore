@@ -49,7 +49,8 @@ include('./funtions/common_function.php');
                         </li>
 
                     </ul>
-                    <form class="d-flex" role="search" action="search_product.php" method="GET">
+                    <form class="d-flex" role="search" action="" method="GET">
+
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
                         <input type="submit" value="Search" class="btn btn-outline-light" name="search_data_product">
 
@@ -86,12 +87,11 @@ include('./funtions/common_function.php');
         <div class="col-md-10">
             <div class="row">
                 <?php
-                getProduct();
+                searchProduct();
                 getUniqueProductWithCategory();
                 getUniqueProductWithBrand();
                 card();
-                //                 $ip = getIPAddress();  
-                // echo 'User Real IP Address - '.$ip;  
+
                 ?>
             </div>
         </div>

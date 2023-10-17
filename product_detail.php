@@ -85,13 +85,14 @@ include('./funtions/common_function.php');
     <div class="row">
         <div class="col-md-10">
             <div class="row">
+
                 <?php
-                getProduct();
+                // getProduct();
+                view_detail();
                 getUniqueProductWithCategory();
                 getUniqueProductWithBrand();
                 card();
-                //                 $ip = getIPAddress();  
-                // echo 'User Real IP Address - '.$ip;  
+
                 ?>
             </div>
         </div>
