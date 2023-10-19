@@ -2,7 +2,6 @@
 include("./includes/connect.php");
 include('./funtions/common_function.php');
 session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +11,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce Website All Products</title>
+    <title>CheckOut Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -46,19 +45,8 @@ session_start();
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa-solid fa-cart-shopping"></i><sup><?php countItemInCart(); ?></sup>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Total Price: <?php echo  totalPricetItemInCart() ?>/--</a>
-
-                        </li>
-
                     </ul>
                     <form class="d-flex" role="search" action="search_product.php" method="GET">
-
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                             name="search_data">
                         <input type="submit" value="Search" class="btn btn-outline-light" name="search_data_product">
@@ -105,47 +93,25 @@ session_start();
     </div>
 
     <!-- Four Child -->
-    <div class="row">
-        <div class="col-md-10">
+    <div class="row px-1">
+        <div class="col-md-12">
             <div class="row">
                 <?php
-                getAllProduct();
-                getUniqueProductWithCategory();
-                getUniqueProductWithBrand();
-                card();
-
+                if (!isset($_SESSION['username'])) {
+                    echo "<script>window.open('./user/user_login.php','_self')</script>";
+                } else {
+                    echo "<script>window.open('./payment.php','_self')</script>";
+                }
                 ?>
+
             </div>
-        </div>
-        <div class="col-md-2 bg-secondary p-0">
-            <!-- Brand to display -->
-            <ul class="navbar-nav me-auto text-center">
-                <li class="nav-item bg-info">
-                    <a class="nav-link text-light" href="#">
-                        <h4>Delivery Brands</h4>
-                    </a>
-                </li>
-
-                <?php
-                getBrand();
-                ?>
-            </ul>
-            <!-- CAtegory -->
-            <ul class="navbar-nav me-auto text-center">
-                <li class="nav-item bg-info">
-                    <a class="nav-link text-light" href="#">
-                        <h4>Categories</h4>
-                    </a>
-                </li>
-                <?php
-                getCategory();
-                ?>
-            </ul>
         </div>
     </div>
 
     <!-- Footer -->
-
+    <!-- <div class="bg-info p-3 text-center">
+        <p> đây là foôter</p>
+    </div> -->
     <?php
     include('./includes/footer.php');
     ?>
