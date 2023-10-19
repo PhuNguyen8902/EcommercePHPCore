@@ -3,6 +3,11 @@ include("./includes/connect.php");
 include('./funtions/common_function.php');
 session_start();
 
+$ip = getIPAddress();
+$get_user = "SELECT * FROM `users` WHERE ip='$ip'";
+$result = mysqli_query($con, $get_user);
+$run_query = mysqli_fetch_array($result);
+$id = $run_query['id'];
 ?>
 
 <!DOCTYPE html>
@@ -10,9 +15,8 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce Website All Products</title>
+    <title>Payment Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -22,6 +26,7 @@ session_start();
 </head>
 
 <body>
+
     <!-- Header -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-info">
@@ -47,18 +52,16 @@ session_start();
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="cart.php">
                                 <i class="fa-solid fa-cart-shopping"></i><sup><?php countItemInCart(); ?></sup>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Total Price: <?php echo  totalPricetItemInCart() ?>/--</a>
-
                         </li>
 
                     </ul>
                     <form class="d-flex" role="search" action="search_product.php" method="GET">
-
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                             name="search_data">
                         <input type="submit" value="Search" class="btn btn-outline-light" name="search_data_product">
@@ -104,52 +107,29 @@ session_start();
         </p>
     </div>
 
-    <!-- Four Child -->
-    <div class="row">
-        <div class="col-md-10">
-            <div class="row">
-                <?php
-                getAllProduct();
-                getUniqueProductWithCategory();
-                getUniqueProductWithBrand();
-                card();
 
-                ?>
+    <div class="container">
+        <h2 class="text-center text-info">
+            Payment Options
+        </h2>
+        <div class="row d-flex justify-content-center align-items-center my-5">
+            <div class="col-md-6">
+                <a href="https://www.paypal.com" target="_blank">
+                    <h2 class="text-center">
+                        Pay Online
+                    </h2>
+                </a>
             </div>
-        </div>
-        <div class="col-md-2 bg-secondary p-0">
-            <!-- Brand to display -->
-            <ul class="navbar-nav me-auto text-center">
-                <li class="nav-item bg-info">
-                    <a class="nav-link text-light" href="#">
-                        <h4>Delivery Brands</h4>
-                    </a>
-                </li>
+            <div class="col-md-6">
+                <a href="./user/?php echo $id?>" target="_blank">
+                    <h2 class="text-center">
+                        Pay Offline
+                    </h2>
+                </a>
+            </div>
 
-                <?php
-                getBrand();
-                ?>
-            </ul>
-            <!-- CAtegory -->
-            <ul class="navbar-nav me-auto text-center">
-                <li class="nav-item bg-info">
-                    <a class="nav-link text-light" href="#">
-                        <h4>Categories</h4>
-                    </a>
-                </li>
-                <?php
-                getCategory();
-                ?>
-            </ul>
         </div>
     </div>
-
-    <!-- Footer -->
-
-    <?php
-    include('./includes/footer.php');
-    ?>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
